@@ -1,0 +1,72 @@
+{% extends 'mainapp/base_game.html' %}
+{% load static %}
+
+{% block name %}Assasin’s Creed:{% endblock %}
+{% block part %}Rogue{% endblock %}
+{% block price %}29.99{% endblock %}
+{% block description %}
+                The plot is set in a fictional history of real world events and follows the centuries-old struggle between the
+                Assassins, who fight for peace with free will, and the Templars, who desire peace through control. The story is set in
+                the mid-18th century during the Seven Years' War, and follows Shay Patrick Cormac, an Assassin-turned-Templar who hunts
+                down former members of his Brotherhood after being betrayed by them. Gameplay in Rogue is very similar to that of Black
+{% endblock %}
+
+
+
+{% extends 'mainapp/base_game.html' %}
+{% load static %}
+
+{% block name %}Ryse:{% endblock %}
+{% block part %}Son Of Rome{% endblock %}
+{% block price %}29.99{% endblock %}
+{% block description %}
+                    The plot is set in a fictional history of real world events and follows the
+                    centuries-old struggle between the
+                    Assassins, who fight for peace with free will, and the Templars, who desire peace through control.
+                    The story is set in
+                    the mid-18th century during the Seven Years' War, and follows Shay Patrick Cormac, an
+                    Assassin-turned-Templar who hunts
+                    down former members of his Brotherhood after being betrayed by them. Gameplay in Rogue is very
+                    similar to that of Black
+                    Flag with a mixture of ship-based naval exploration and third-person land-based exploration with
+                    some new features.
+{% endblock %}
+
+
+{% extends 'mainapp/base_game.html' %}
+{% load static %}
+
+{% block name %}Tomb Raider{% endblock %}
+{% block price %}29.99{% endblock %}
+{% block description %}
+                    The plot is set in a fictional history of real world events and follows the
+                    centuries-old struggle between the
+                    Assassins, who fight for peace with free will, and the Templars, who desire peace through control.
+                    The story is set in
+                    the mid-18th century during the Seven Years' War, and follows Shay Patrick Cormac, an
+                    Assassin-turned-Templar who hunts
+                    down former members of his Brotherhood after being betrayed by them. Gameplay in Rogue is very
+                    similar to that of Black
+                    Flag with a mixture of ship-based naval exploration and third-person land-based exploration with
+                    some new features.
+{% endblock %}
+
+
+{% extends 'mainapp/base_game.html' %}
+{% load static %}
+
+{% block name %}>World Of Warcraft:{% endblock %}
+{% block part %}Wrath Of The Linch King{% endblock %}
+{% block price %}29.99{% endblock %}
+{% block description %}
+                    The plot is set in a fictional history of real world events and follows the
+                    centuries-old struggle between the
+                    Assassins, who fight for peace with free will, and the Templars, who desire peace through control.
+                    The story is set in
+                    the mid-18th century during the Seven Years' War, and follows Shay Patrick Cormac, an
+                    Assassin-turned-Templar who hunts
+                    down former members of his Brotherhood after being betrayed by them. Gameplay in Rogue is very
+                    similar to that of Black
+                    Flag with a mixture of ship-based naval exploration and third-person land-based exploration with
+                    some new features.
+{% endblock %}

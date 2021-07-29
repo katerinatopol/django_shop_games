@@ -1,0 +1,28 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Game</th>
+        <th scope="col">Price</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in basket %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ item.game }}</td>
+        <td>{{ item.game.price }}</td>
+        <td>
+            <button class="btn btn-round">
+                <a href="{% url 'basket:remove' item.pk %}" class="">
+                    удалить
+                </a>
+            </button>
+        </td>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+</table>

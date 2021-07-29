@@ -1,0 +1,34 @@
+[
+  {
+      "game": "Assasin's Creed",
+      "image": "product_images/assassin_1.jpg"
+  },
+  {
+      "game": "Assasin's Creed",
+      "image": "product_images/assassin_2.jpg"
+  },
+  {
+      "game": "Assasin's Creed",
+      "image": "product_images/assassin_3.jpg"
+  },
+  {
+      "game": "Assasin's Creed",
+      "image": "product_images/assassin_4.jpg"
+  },
+  {
+      "game": "World Of Warcraft",
+      "image": "product_images/wow_1.jpg"
+  },
+  {
+      "game": "World Of Warcraft",
+      "image": "product_images/wow_2.jpg"
+  },
+  {
+      "game": "World Of Warcraft",
+      "image": "product_images/wow_3.jpg"
+  },
+  {
+      "game": "World Of Warcraft",
+      "image": "product_images/wow_4.jpg"
+  }
+]

@@ -1,0 +1,114 @@
+{% extends 'shop_games/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'mainapp/style.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+{% include 'shop_games/includes/inc_main_menu.html' %}
+
+        <!--Слайдер-->
+                   <!-- TODO опять сломался слайдер -->
+        <div class="product">
+            <div class="slider">
+                <div id="fsClipper">
+                    <div id="fsScreen"></div>
+                </div>
+
+                <div id="fsLinks">
+                    {% for link in link_img %}
+                        <a href="#" onclick="return Show_picture( '/media/{{link.image}}', 600, 400 )">
+                            <img class="mini-img" src="/media/{{link.image}}" alt="min">
+                        </a>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="text">
+                <span class="discount-games-black">{{game.name}}</span>
+                <p class="discount-games">{{game.part}}</p>
+                <span class="discount-price">{{game.price}}</span>
+                <a href="{% url 'basket:add' game.pk %}">
+                    <div class="buy-product">Buy</div>
+                </a>
+                <p class="description1">{{game.description}}</p>
+            </div>
+        </div>
+
+        <!-- Our Gallery -->
+        <div class="fon">
+            <h2>Similar games</h2>
+            <div class="our-gallery margin-gallery fon-opacity">
+                <div><img src="{% static 'shop_games/img/shadow.png' %}" alt="MIDDLE-EARTH: Shadow Of War">
+                    <span>MIDDLE-EARTH: </span><span class="name-game">Shadow Of War</span>
+                    <a href="#"><div class="buy buy-new">Buy</div></a>
+                </div>
+                <div><img src="{% static 'shop_games/img/dishonored.png' %}" alt="DISHONORED 2">
+                    <span>DISHONORED 2</span>
+                    <a href="#"><div class="buy">Buy</div></a>
+                </div>
+                <div>
+                    <img src="{% static 'shop_games/img/thies.png' %}" alt="THIEF">
+                    <span>THIEF</span>
+                    <a href="#"><div class="buy">Buy</div></a>
+                </div>
+                <div>
+                    <img src="{% static 'shop_games/img/hitman.png' %}" alt="HITMAN">
+                    <span>HITMAN</span>
+                    <a href="#"><div class="buy">Buy</div></a>
+                </div>
+            </div>
+        </div>
+
+
+{% include 'shop_games/includes/inc_contacts.html' %}
+<script>
+    function Filmstrip() {
+        this.ePicture = document.getElementById('fsScreen');
+        this.ePrev = document.getElementById('fsControl_prev');
+        this.eNext = document.getElementById('fsControl_next');
+        var eLinks = document.getElementById('fsLinks');
+        this.aeLink = eLinks.getElementsByTagName('A');
+        this.show_picture = function (sBackground, iWidth, iHeight) {
+            this.ePicture.style.backgroundImage = "url(" + sBackground + ")";
+            if (iWidth)
+                this.ePicture.style.width = iWidth;
+            if (iHeight)
+                this.ePicture.style.height = iHeight;
+            this.set_current(sBackground);
+        }
+        this.set_current = function (sHref) {
+            for (var i = 0; i < this.aeLink.length; i++) {
+                if (this.aeLink[i].href.match(new RegExp(sHref + "$"))) {
+                    this.aeLink[i].className += " current";
+                    this.ePrev.className = this.ePrev.className.replace(/\s+disabled/g, "");
+                    this.eNext.className = this.eNext.className.replace(/\s+disabled/g, "");
+                    if (i == 0) {
+                        this.ePrev.className += " disabled";
+                        this.ePrev.onclick = function () { };
+                        this.eNext.onclick = this.aeLink[i + 1].onclick;
+                    } else if (i == this.aeLink.length - 1) {
+                        this.eNext.className += " disabled";
+                        this.eNext.onclick = function () { };
+                        this.ePrev.onclick = this.aeLink[i - 1].onclick;
+                    } else {
+                        this.eNext.onclick = this.aeLink[i + 1].onclick;
+                        this.ePrev.onclick = this.aeLink[i - 1].onclick;
+                    }
+                } else {
+                    this.aeLink[i].className = this.aeLink[i].className.replace(/\s*current/g, "");
+                }
+            }
+        }
+    }
+    var oFilmstrip = new Filmstrip();
+    function Show_picture(sHref, iWidth, iHeight) {
+        oFilmstrip.show_picture(sHref, iWidth, iHeight);
+        return false;
+    }
+    oFilmstrip.aeLink[0].onclick();
+</script>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'shop_games/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'mainapp/style.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+{% include 'shop_games/includes/inc_main_menu.html' %}
+    <!--Menu-->
+    <div class="sitebar-content">
+        <div class="menu-contact">
+            <ul>
+                <li>
+                    <a href="{% url 'gallery:category' 0 %}" class="{% if request.resolver_match.kwargs.pk == 0 %} active
+                              {% endif %}">ALL</a>
+                </li>
+                {% for link in links_menu %}
+                    <li>
+                        <a href="{% url 'gallery:category' link.pk %}"
+                        class="{% if request.resolver_match.kwargs.pk|add:0 == link.pk %}
+                              active
+                            {% endif %}">
+                            {{ link.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+        <!-- Our Gallery -->
+        <h2 style="margin-top: 95px;">Our Gallery</h2>
+
+            <div class="our-gallery margin-gallery">
+                            {% if category %}
+                    <h2>Категория: {{ category.name|title }}</h2>
+                {% endif %}
+                <div class="paginator">
+                  {% if gallery.has_previous %}
+                    <a href="{% url 'gallery:page' category.pk products.previous_page_number %}">
+                      <
+                    </a>
+                  {% endif %}
+                  <span class="current">
+                    страница {{ gallery.number }} из
+                    {{ gallery.paginator.num_pages }}
+                  </span>
+                  {% if gallery.has_next %}
+                    <a href="{% url 'products:page' category.pk products.next_page_number %}">
+                      >
+                    </a>
+                  {% endif %}
+                </div>
+<!--            {% for game in games %}-->
+
+
+<!--                    <div>-->
+<!--                        <a href="{% url 'gallery:games' game.pk %}"><img src="/media/{{game.top_image}}" alt="{{game.name}}"></a>-->
+<!--                        <span>{{game.name}}<br>{{game.part}}</span>-->
+<!--                        <a href="{% url 'basket:add' game.pk %}"><div class="buy">Buy</div></a>-->
+<!--                    </div>-->
+
+<!--            {% endfor %}-->
+<!--        </div>-->
+
+
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/battle1.png' %}" alt="battlefield 1">-->
+<!--                <span>battlefield 1</span>-->
+<!--                <a href="#"><div class="buy">Buy</div></a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/battle2.png' %}" alt="star wars: Battlefront II">-->
+<!--                <span>star wars: </span><span class="name-game">Battlefront II</span>-->
+<!--                <a href="#"><div class="buy buy-new">Buy</div></a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/battle4.png' %}" alt="BATTLEFIELD 4">-->
+<!--                <span>BATTLEFIELD 4</span>-->
+<!--                <a href="#"><div class="buy">Buy</div></a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/WoT.png' %}" alt="world of tanks">-->
+<!--                <span>world of tanks</span>-->
+<!--                <a href="#"><div class="buy">Buy</div></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="our-gallery margin-gallery">-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/assassin.png' %}" alt="assassin">-->
+<!--                <span>assassin’s creed: </span><span class="name-game">Rogue</span>-->
+<!--                <a href="#"><div class="buy buy-new">Buy</div></a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/honor.png' %}" alt="for honor">-->
+<!--                <span>for honor</span>-->
+<!--                <a href="#"><div class="buy">Buy</div></a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/WoW.png' %}" alt="world of warships">-->
+<!--                <span>world of warships</span>-->
+<!--                <a href="#"><div class="buy">Buy</div></a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="{% static 'shop_games/img/CoD.png' %}" alt="call of duty">-->
+<!--                <span>call of duty:</span><span class="name-game">Infinite Warface</span>-->
+<!--                <a href="#"><div class="buy buy-new">Buy</div></a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+    <!--More games-->
+        <a href="#"><div class="more-games">
+            Show more games >
+        </div></a>
+
+    <!-- Buy discount -->
+        <div class="discount">
+            <div class="discount1">
+                <span class="discount-span">discount</span>
+                <p class="discount-games">CALL OF DUTY: <br>Modern Warfare 3</p>
+                <span class="discount-price">$14.44 </span><span class="discount-price2">/ $28.90</span>
+                <a href="#"><div class="buy-discount">Buy</div></a>
+            </div>
+            <div class="discount2">
+                <span class="discount-span">discount</span>
+                <p class="discount-games">MEDAL OF HONOR</p>
+                <span class="discount-price">$15.96 </span><span class="discount-price2">/ $29.99</span>
+                <a href="#"><div class="buy-discount">Buy</div></a>
+            </div>
+        </div>
+{% include 'shop_games/includes/inc_contacts.html' %}
+{% endblock %}
