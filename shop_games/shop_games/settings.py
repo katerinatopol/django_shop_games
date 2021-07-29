@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import json
 import os
 from pathlib import Path
 
@@ -41,7 +42,9 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'basketapp',
-    'adminapp'
+    'adminapp',
+
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -158,3 +161,15 @@ EMAIL_HOST_USER = '80e6725cd9583b'
 EMAIL_HOST_PASSWORD = '9b12ab3c40d03f'
 EMAIL_PORT = '465'
 EMAIL_USE_TLS = True
+
+# vk_id = '7914263'
+# vk_key = 'DAzMkUsy1Pdd9c9musYF'
+# vk_secret = 'be373d62be373d62be373d62e9be4ffe75bbe37be373d62df359ccd7881e0bc87c81146'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+)
+# если храним секреты в файле vk.json
+with open('shop_games/vk.json', 'r') as file:
+    VK = json.load(file)
