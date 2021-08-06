@@ -4,6 +4,15 @@ from shop_games import settings
 from mainapp.models import Games
 
 
+class BasketQuerySet(models.QuerySet):
+
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super(BasketQuerySet, self).delete(*args, **kwargs)
+
+
 class Basket(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
