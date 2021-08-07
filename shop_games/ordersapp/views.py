@@ -73,17 +73,20 @@ class OrderUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('ordersapp:orders_list')
 
     def get_context_data(self, **kwargs):
-           data = super(OrderUpdate, self).get_context_data(**kwargs)
-           OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
+        data = super(OrderUpdate, self).get_context_data(**kwargs)
+        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
 
-           if self.request.POST:
-               formset = OrderFormSet(self.request.POST, instance=self.object)
-           else:
-               formset = OrderFormSet(instance=self.object)
+        if self.request.POST:
+            data['orderitems'] = OrderFormSet(self.request.POST, instance=self.object)
+        else:
+            formset = OrderFormSet(instance=self.object)
+            for form in formset.forms:
+                if form.instance.pk:
+                    form.initial['price'] = form.instance.product.price
 
-           data['orderitems'] = formset
+            data['orderitems'] = formset
 
-           return data
+        return data
 
     def form_valid(self, form):
         context = self.get_context_data()
