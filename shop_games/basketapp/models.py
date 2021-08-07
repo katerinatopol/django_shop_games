@@ -14,6 +14,8 @@ class BasketQuerySet(models.QuerySet):
 
 
 class Basket(models.Model):
+    objects = BasketQuerySet.as_manager()
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -28,6 +30,10 @@ class Basket(models.Model):
         auto_now_add=True,
     )
     is_deleted = models.BooleanField(default=False)
+
+    @staticmethod
+    def get_item(pk):
+        return Basket.objects.filter(pk=pk).first()
 
     @property
     def product_cost(self):
@@ -44,3 +50,17 @@ class Basket(models.Model):
         _items = Basket.objects.filter(user=self.user)
         _total_cost = sum(list(map(lambda x: x.product_cost, _items)))
         return _total_cost
+
+    def delete(self):
+        self.game.quantity += self.quantity
+        self.game.save()
+        super(self.__class__, self).delete()
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            self.game.quantity -= self.quantity - self.__class__.get_item(self.pk).quantity
+        else:
+            self.game.quantity -= self.quantity
+
+        self.game.save()
+        super(self.__class__, self).save(*args, **kwargs)
