@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 
 # from mainapp.models import Games
-from shop_games.mainapp.models import Games
+from mainapp.models import Games
 
 
 class OrderItemQuerySet(models.QuerySet):
