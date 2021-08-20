@@ -2,10 +2,20 @@ from django.conf import settings
 from django.db import models
 
 # from mainapp.models import Games
-from shop_games.mainapp.models import Games
+from mainapp.models import Games
+
+
+class OrderItemQuerySet(models.QuerySet):
+
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super(OrderItemQuerySet, self).delete(*args, **kwargs)
 
 
 class Order(models.Model):
+    objects = OrderItemQuerySet.as_manager()
     FORMING = 'FM'
     SENT_TO_PROCEED = 'STP'
     PROCEEDED = 'PD'
@@ -88,3 +98,8 @@ class OrderItem(models.Model):
 
     def get_product_cost(self):
         return self.product.price * self.quantity
+
+    def delete(self):
+        self.product.quantity += self.quantity
+        self.product.save()
+        super(self.__class__, self).delete()
